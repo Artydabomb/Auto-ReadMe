@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require("fs");
+const generateMarkdown = require('./generateMarkdown');
 
 //Prompting the user questions to generate their README.md file.
 inquirer
@@ -11,20 +12,19 @@ inquirer
         },
         {
             type: 'input',
-            message: 'Enter a description of your project.',
+            message: 'Enter a description of your project. Why did you build your project? What problems did you solve and what did you learn along the way?',
             name: 'description',
         },
         {
             type: 'input',
-            message: 'What programs and/or dependencies are required to install and run this web application?',
+            message: 'List the programs and/or dependencies that are required to install and run this web application.',
             name: 'installation',
         },
-        //Not sure how to incorporate this here for the purposes of this README project
-        /*{
+        {
             type: 'input',
-            message: 'What data is used for this web application? Ask TAs to help define this question...',
+            message: 'Provide instructions on how to use this program.',
             name: 'usage',
-        },*/
+        },
         {
             type: 'input',
             message: 'How can other contribute to this project? What are the contribution guidlines?',
@@ -39,17 +39,17 @@ inquirer
             type: 'checkbox',
             message: 'Which type of license do you want to add to your project?',
             name: 'license',
-            choices: ['MIT', 'ISC']
+            choices: ['MIT', 'ISC', 'GNU GPL v3', 'GNU AGPL v3']
         },
         {
             type: 'input',
             message: 'What is your GitHub username?',
-            name: 'license',
+            name: 'username',
         },
         {
             type: 'input',
             message: 'What is your e-mail address?',
-            name: 'license',
+            name: 'email',
         },
     ])
 
@@ -57,14 +57,7 @@ inquirer
     //Note: JSON.stringify is required to convert the answers, which is an object, into a string to populate the README file.
     .then(answers => {
         console.log(answers);
-        fs.appendFile("README.md", JSON.stringify(answers) + '\n', err =>
-            err ? console.error(err) : console.log("Response added to file."));
+        fs.appendFile("README.md", generateMarkdown(answers) + '\n', err =>
+            err ? console.error(err) : console.log("Success! Response added to file."));
     })
 
-/*.catch(error => {
-    if (error.isTtyError) {
-
-    } else {
-
-    }
-});*/
