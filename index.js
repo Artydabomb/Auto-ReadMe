@@ -36,10 +36,10 @@ inquirer
             name: 'testing',
         },
         {
-            type: 'checkbox',
+            type: 'list',
             message: 'Which type of license do you want to add to your project?',
             name: 'license',
-            choices: ['MIT', 'ISC', 'GNU GPL v3', 'GNU AGPL v3']
+            choices: ['MIT', 'ISC',],
         },
         {
             type: 'input',
@@ -50,6 +50,16 @@ inquirer
             type: 'input',
             message: 'What is your e-mail address?',
             name: 'email',
+        },
+        {
+            type: 'input',
+            message: 'For licensing purposes, what year is your code being developed?',
+            name: 'year',
+        },
+        {
+            type: 'input',
+            message: 'For licensing purposes, what is your full name?',
+            name: 'fullname',
         },
     ])
 
